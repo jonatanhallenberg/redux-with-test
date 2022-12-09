@@ -1,4 +1,6 @@
-# How I setup this repo
+# Steg-för-steg
+
+## Counter-komponent med useState
 
 1. Skapa react app
 
@@ -38,4 +40,9 @@ const App = () => (
 export default App;
 ```
 
-3. 
+```sh
+# Checka ut koden fram tills här
+git checkout counter-with-usestate
+```
+
+
