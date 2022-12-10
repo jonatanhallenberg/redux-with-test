@@ -216,3 +216,37 @@ describe('counterSlice', () => {
 git checkout unit-test-counter-slice
 ```
 ---
+
+## Lägga till en action med Payload
+
+- Lägg till reducerfunktionen *increaseByX(x: number)* i counterSlice:
+
+```diff
+// counterSlice.tsx
+
+...
+
++increaseByX(state, action: PayloadAction<number>) {
++    state.count+=action.payload; 
++}
+
+...
+
+-export const { increase, decrease } = counterSlice.actions
++export const { increase, decrease, increaseByX } = counterSlice.actions
+
+```
+
+- Lägg till testfall för den nya funktionen:
+
+```diff
+//counterSlice.spec.ts
+-import reducer, { increase, decrease } from './counterSlice';
++import reducer, { increase, decrease, increaseByX } from './counterSlice';
+
+...
+
+
+...
+
+```

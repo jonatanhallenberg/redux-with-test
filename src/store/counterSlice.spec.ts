@@ -1,4 +1,4 @@
-import reducer, { increase, decrease } from './counterSlice';
+import reducer, { increase, decrease, increaseByX } from './counterSlice';
 
 describe('counterSlice', () => {
 
@@ -7,7 +7,7 @@ describe('counterSlice', () => {
             count: 0
         })
     })
-    
+
     it("increase by one when dispatching increase action", () => {
         const previousState = { count: 5 };
         expect(reducer(previousState, increase())).toEqual({
@@ -19,6 +19,20 @@ describe('counterSlice', () => {
         const previousState = { count: 5 };
         expect(reducer(previousState, decrease())).toEqual({
             count: 4
+        })
+    })
+
+    it("increase by 5 when dispatching increaseByX action sending 5 as payload", () => {
+        const previousState = { count: 5 };
+        expect(reducer(previousState, increaseByX(5))).toEqual({
+            count: 10
+        })
+    })
+
+    it("decrease by 5 when dispatching increaseByX action sending -5 as payload", () => {
+        const previousState = { count: 15 };
+        expect(reducer(previousState, increaseByX(-5))).toEqual({
+            count: 10
         })
     })
 
