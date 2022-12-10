@@ -9,7 +9,7 @@ const Counter = () => {
     return <>
         <p>Count: {count}</p>
         <button onClick={() => dispatch(decrease())}>-1</button>
-        <button onClick={() => dispatch(increase())}>-1</button>
+        <button onClick={() => dispatch(increase())}>+1</button>
     </>
 }
 export default Counter;
