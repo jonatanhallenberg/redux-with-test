@@ -39,6 +39,13 @@ const App = () => (
 export default App;
 ```
 ---
+
+4. Ta bort App.test.tsx
+
+Ta bort *App.test.tsx* då testfallet inte längre är aktuellt.
+
+---
+
 ```sh
 # Checka ut koden fram till hit
 git checkout counter-with-usestate
@@ -130,6 +137,7 @@ npm start
 
 ```sh
 # Checka ut koden fram till hit
-git checkout counter-with-usestate
+git checkout redux-installed
 ```
 ---
+```
