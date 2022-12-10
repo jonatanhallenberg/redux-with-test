@@ -39,6 +39,13 @@ const App = () => (
 export default App;
 ```
 ---
+
+4. Ta bort App.test.tsx
+
+Ta bort *App.test.tsx* då testfallet inte längre är aktuellt.
+
+---
+
 ```sh
 # Checka ut koden fram till hit
 git checkout counter-with-usestate
@@ -216,3 +223,4 @@ describe('counterSlice', () => {
 git checkout unit-test-counter-slice
 ```
 ---
+```
