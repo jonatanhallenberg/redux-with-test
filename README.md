@@ -253,7 +253,27 @@ git checkout unit-test-counter-slice
 
 ...
 
++it("increase by 5 when dispatching increaseByX action sending 5 as payload", () => {
++    const previousState = { count: 5 };
++    expect(reducer(previousState, increaseByX(5))).toEqual({
++        count: 10
++    })
++})
+
++it("decrease by 5 when dispatching increaseByX action sending -5 as payload", () => {
++    const previousState = { count: 15 };
++    expect(reducer(previousState, increaseByX(-5))).toEqual({
++        count: 10
++    })
++})
 
 ...
 
 ```
+---
+
+```sh
+# Checka ut koden fram till hit
+git checkout add-payload-action
+```
+---
