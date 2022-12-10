@@ -130,6 +130,48 @@ npm start
 
 ```sh
 # Checka ut koden fram till hit
-git checkout counter-with-usestate
+git checkout redux-installed
+```
+---
+
+## Refaktorisera Counter att använda Redux
+
+1. Använd Redux i Counter.tsx
+
+```diff
+import React, {useState} from 'react';
++import { useSelector, useDispatch } from 'react-redux'
++import { increase, decrease } from './store/counterSlice';
+
+const Counter = () => {
+
+    
+-    const [ count, setCount ] = useState(0);
++   const dispatch = useDispatch();
++   const count = useSelector(state => state.counter.count);
+    return <>
+        <p>Count: {count}</p>
++        <button onClick={() => dispatch(decrease())}>-1</button>
+-        <button onClick={() => setCount(count - 1)}>-1</button>
++        <button onClick={() => dispatch(increase())}>-1</button>
+-        <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+}
+export default Counter;
+```
+
+2. Testa i Chrome
+
+```sh
+npm start
+```
+
+- Öppna sidan i Chrome och kolla vad som händer i Redux DevTools när man trycker på plus- och minusknapparna
+
+---
+
+```sh
+# Checka ut koden fram till hit
+git checkout counter-with-redux
 ```
 ---
