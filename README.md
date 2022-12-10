@@ -1,5 +1,4 @@
-# Steg-för-steg
-
+# Workbook - Steg-för-steg
 ## Counter-komponent med useState
 
 1. Skapa react app
@@ -39,10 +38,98 @@ const App = () => (
 )
 export default App;
 ```
+---
+```sh
+# Checka ut koden fram till hit
+git checkout counter-with-usestate
+```
+---
+
+## Lägga in Redux
+
+1. Installera npm-paket
 
 ```sh
-# Checka ut koden fram tills här
-git checkout counter-with-usestate
+npm install redux
+npm install @reduxjs/toolkit
+npm install react-redux
+```
+
+2. Skapa counterSlice.ts
+
+```ts
+// store/counterSlice.ts
+import { createSlice } from '@reduxjs/toolkit'
+
+const counterSlice = createSlice({
+  name: 'counter',
+  initialState: { count: 0 },
+  reducers: {
+    increase(state, action) {
+      state.count++;
+    },
+    decrease(state, action) {
+      state.count--;
+    }
+  }
+})
+
+export const { increase, decrease } = counterSlice.actions
+export default counterSlice.reducer
+```
+
+3. Skapa store/index.ts och lägg in counterReducer
+
+```tsx
+// store/index.ts
+
+import { configureStore } from '@reduxjs/toolkit'
+import counterReducer from './counterSlice'
+
+export const store = configureStore({
+  reducer: {
+    counter: counterReducer,
+  }
+})
+```
+
+4. Lägg in Provider i index.tsx
+
+```tsx
+// index.tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import { Provider } from 'react-redux'
+import { store } from './store'
+
+import App from './App'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
 ```
 
 
+5. Installera Chrome Redux DevTools
+
+- https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en
+
+```sh
+npm start
+```
+
+- Öppna sidan i Chrome och kontrollera att Redux fungerar genom att öppna Redux DevTools. Om State innehåller *counter* är allt ok!
+
+![](20221210121611.png)  
+
+---
+
+```sh
+# Checka ut koden fram till hit
+git checkout counter-with-usestate
+```
+---
