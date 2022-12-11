@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react';
+import { useAppSelector, useAppDispatch } from './store/hooks';
 import { increase, decrease } from './store/counterSlice';
 
 const Counter = () => {
 
-    const dispatch = useDispatch();
-    const count = useSelector((state: any) => state.counter.count);
+    const dispatch = useAppDispatch();
+    const count = useAppSelector((state) => state.counter.count);
     return <>
         <p>Count: {count}</p>
         <button onClick={() => dispatch(decrease())}>-1</button>

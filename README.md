@@ -277,3 +277,99 @@ git checkout unit-test-counter-slice
 git checkout add-payload-action
 ```
 ---
+## Extra: Implementera Typescript för Redux
+
+Baserat på https://redux.js.org/usage/usage-with-typescript
+
+1. Lägg till *RootState* och *AppDispatch* längst ner i store/index.ts
+
+```tsx
+
+...
+
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
+
+````
+
+2. Skapa en store/hooks.ts
+
+```ts
+// store/hooks.ts
+
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import type { RootState, AppDispatch } from './'
+
+// Use throughout your app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+```
+
+3. Typa counterSlice
+
+```diff
+// counterSlice.tsx
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
++interface CounterState {
++    count: number
++}
+
++const initialState: CounterState = {
++    count: 0
++}
+
+const counterSlice = createSlice({
+    name: 'counter',
+-    initialState: { count: 0 },
++    initialState,
+    reducers: {
+        increase(state, action: PayloadAction<void>) {
+            state.count++;
+        },
+        decrease(state, action: PayloadAction<void>) {
+            state.count--;
+        },
+        increaseByX(state, action: PayloadAction<number>) {
+            state.count += action.payload;
+        }
+    }
+})
+
+export const { increase, decrease, increaseByX } = counterSlice.actions
+export default counterSlice.reducer
+```
+
+4. Byt ut useDispatch / useSelector mot useAppDispatch / useAppSelector
+
+```diff
+# Counter.tsx
+import React from 'react';
++import { useAppSelector, useAppDispatch } from './store/hooks';
+-import { useSelector, useDispatch } from 'react-redux';
+import { increase, decrease } from './store/counterSlice';
+
+const Counter = () => {
+
++    const dispatch = useAppDispatch();
+-    const dispatch = useDispatch();
++    const count = useAppSelector((state) => state.counter.count);
+-    const count = useSelector((state: any) => state.counter.count);
+    return <>
+        <p>Count: {count}</p>
+        <button onClick={() => dispatch(decrease())}>-1</button>
+        <button onClick={() => dispatch(increase())}>+1</button>
+    </>
+}
+export default Counter;
+```
+
+---
+
+```sh
+# Checka ut koden fram till hit
+git checkout add-typescript
+```
+---
