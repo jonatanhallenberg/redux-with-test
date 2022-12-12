@@ -48,5 +48,5 @@ Ta bort *App.test.tsx* då testfallet inte längre är aktuellt.
 
 ```sh
 # Checka ut koden fram tills här
-git checkout counter-with-usestate
+git checkout 1-counter-with-usestate
 ```
