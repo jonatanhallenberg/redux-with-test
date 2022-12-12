@@ -48,7 +48,7 @@ Ta bort *App.test.tsx* då testfallet inte längre är aktuellt.
 
 ```sh
 # Checka ut koden fram till hit
-git checkout counter-with-usestate
+git checkout 1-counter-with-usestate
 ```
 ---
 
@@ -137,7 +137,7 @@ npm start
 
 ```sh
 # Checka ut koden fram till hit
-git checkout redux-installed
+git checkout 2-redux-installed
 ```
 ---
 
@@ -179,7 +179,7 @@ npm start
 
 ```sh
 # Checka ut koden fram till hit
-git checkout counter-with-redux
+git checkout 3-counter-with-redux
 ```
 ---
 ```
